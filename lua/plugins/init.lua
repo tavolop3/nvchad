@@ -94,4 +94,41 @@ return {
       }
     end,
   },
+
+  {
+    "jiaoshijie/undotree",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = true,
+    keys = { -- load the plugin only when using it's keybinding:
+      { "<leader>u", "<cmd>lua require('undotree').toggle()<cr>" },
+    },
+  },
+
+  {
+    "folke/zen-mode.nvim",
+    opts = {
+      window = {
+        backdrop = 0.7,
+        options = {
+          number = false, --disable number column
+          signcolumn = "no",
+        },
+      },
+      plugins = {
+        gitsigns = false,
+        wezterm = {
+          enabled = true,
+          -- can be either an absolute font size or the number of incremental steps
+          font = "+4", -- (10% increase per step)
+        },
+      },
+      on_open = function()
+        vim.opt.laststatus = 0 -- oculta la statusline al entrar en Zen Mode
+      end,
+      on_close = function()
+        vim.opt.laststatus = 3 -- reactiva la statusline al salir de Zen Mode
+      end,
+    },
+    keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
+  },
 }

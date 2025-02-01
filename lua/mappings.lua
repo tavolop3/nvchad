@@ -38,4 +38,4 @@ map("n", "<leader>l", "<C-w>l", { desc = "Moverse a la ventana derecha" })
 -- horizontal term
 map("n", "<leader>tt", function()
   require("nvchad.term").new { pos = "sp" }
-end, { desc = "terminal new horizontal term" })
+end, { desc = "New horizontal terminal" })
