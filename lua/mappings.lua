@@ -7,7 +7,7 @@ local map = vim.keymap.set
 -- command mode with ; also
 map("n", ";", ":", { desc = "CMD enter command mode" })
 -- escape with jk
-map("i", "jk", "<ESC>")
+map("i", "jk", "<ESC>", { desc = "Escape insert mode" })
 -- save file with C-s on all modes
 map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 
@@ -15,19 +15,19 @@ map({ "n", "i", "v" }, "<C-s>", "<cmd> w <cr>")
 -- load the session for the current directory
 map("n", "<leader>qs", function()
   require("persistence").load()
-end)
+end, { desc = "Load session" })
 -- select a session to load
 map("n", "<leader>qS", function()
   require("persistence").select()
-end)
+end, { desc = "Select session" })
 -- load the last session
 map("n", "<leader>ql", function()
   require("persistence").load { last = true }
-end)
+end, { desc = "Load last session" })
 -- stop Persistence => session won't be saved on exit
 map("n", "<leader>qd", function()
   require("persistence").stop()
-end)
+end, { desc = "Don't save session on exit" })
 
 -- window movement with leader hjkl
 map("n", "<leader>h", "<C-w>h", { desc = "Moverse a la ventana izquierda" })
@@ -39,3 +39,14 @@ map("n", "<leader>l", "<C-w>l", { desc = "Moverse a la ventana derecha" })
 map("n", "<leader>tt", function()
   require("nvchad.term").new { pos = "sp" }
 end, { desc = "New horizontal terminal" })
+
+-- split and joins
+require("mini.splitjoin").setup {
+  mappings = {
+    split = "gS", -- Mapeo para hacer split (en este caso, 'gS')
+    join = "gJ", -- Mapeo para hacer join (en este caso, 'gJ')
+  },
+}
+
+-- mini move
+require("mini.move").setup()

@@ -56,4 +56,16 @@ autocmd("BufReadPost", {
   end,
 })
 
+-- para que me siga el cd cuando estoy en otro directorio
 require "plugins.custom.autocd"
+
+-- split and joins
+require("mini.splitjoin").setup {
+  mappings = {
+    split = "gS", -- Mapeo para hacer split (en este caso, 'gS')
+    join = "gJ", -- Mapeo para hacer join (en este caso, 'gJ')
+  },
+}
+
+-- mini move
+require("mini.move").setup()

@@ -131,4 +131,15 @@ return {
     },
     keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },
+
+  -- todas las de mini (no hace falta importar las standalone y se activan en mapping)
+  {
+    "echasnovski/mini.nvim",
+    version = "*",
+  },
+
+  {
+    "ThePrimeagen/vim-be-good",
+    cmd = "VimBeGood",
+  },
 }
