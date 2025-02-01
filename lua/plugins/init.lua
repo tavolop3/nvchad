@@ -49,22 +49,23 @@ return {
   -- jump motions
   {
     "ggandor/leap.nvim",
-    lazy = false,
-    keys = {
-      { "s", mode = { "n", "x", "o" }, desc = "Leap Forward to" },
-      { "S", mode = { "n", "x", "o" }, desc = "Leap Backward to" },
-      { "gs", mode = { "n", "x", "o" }, desc = "Leap from Windows" },
-    },
-    config = function(_, opts)
-      local leap = require "leap"
-      for k, v in pairs(opts) do
-        leap.opts[k] = v
-      end
-      leap.add_default_mappings(true)
-      vim.keymap.del({ "x", "o" }, "x")
-      vim.keymap.del({ "x", "o" }, "X")
-    end,
   },
+
+  {
+    "ggandor/flit.nvim",
+    enabled = true,
+    keys = function()
+      ---@type LazyKeysSpec[]
+      local ret = {}
+      for _, key in ipairs { "f", "F", "t", "T" } do
+        ret[#ret + 1] = { key, mode = { "n", "x", "o" } }
+      end
+      return ret
+    end,
+    opts = { labeled_modes = "nx" },
+  },
+
+  { "tpope/vim-repeat", event = "VeryLazy" },
 
   {
     "kdheepak/lazygit.nvim",
@@ -86,12 +87,10 @@ return {
 
   {
     "kylechui/nvim-surround",
-    version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = "VeryLazy",
+    version = "*",
+    keys = { "ys", "ds", "cs" },
     config = function()
-      require("nvim-surround").setup {
-        -- Configuration here, or leave empty to use defaults
-      }
+      require("nvim-surround").setup {}
     end,
   },
 
@@ -132,10 +131,22 @@ return {
     keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
   },
 
-  -- todas las de mini (no hace falta importar las standalone y se activan en mapping)
   {
-    "echasnovski/mini.nvim",
+    "echasnovski/mini.splitjoin",
     version = "*",
+    keys = { "gS", "gJ" }, -- Solo carga cuando se usan estas teclas
+    config = function()
+      require("mini.splitjoin").setup()
+    end,
+  },
+
+  {
+    "echasnovski/mini.move",
+    version = "*",
+    keys = { "<M-h>", "<M-l>", "<M-j>", "<M-k>" }, -- Solo carga cuando se usan estas teclas
+    config = function()
+      require("mini.move").setup()
+    end,
   },
 
   {

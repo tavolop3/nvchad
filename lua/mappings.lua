@@ -39,14 +39,3 @@ map("n", "<leader>l", "<C-w>l", { desc = "Moverse a la ventana derecha" })
 map("n", "<leader>tt", function()
   require("nvchad.term").new { pos = "sp" }
 end, { desc = "New horizontal terminal" })
-
--- split and joins
-require("mini.splitjoin").setup {
-  mappings = {
-    split = "gS", -- Mapeo para hacer split (en este caso, 'gS')
-    join = "gJ", -- Mapeo para hacer join (en este caso, 'gJ')
-  },
-}
-
--- mini move
-require("mini.move").setup()
