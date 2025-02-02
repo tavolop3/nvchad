@@ -202,7 +202,9 @@ return {
       "MunifTanjim/nui.nvim",
     },
     config = function()
-      require("leetcode").setup()
+      require("leetcode").setup {
+        lang = "python3",
+      }
     end,
     event = { "BufRead leetcode.nvim", "BufNewFile leetcode.nvim" },
   },
