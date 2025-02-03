@@ -208,4 +208,23 @@ return {
     end,
     event = { "BufRead leetcode.nvim", "BufNewFile leetcode.nvim" },
   },
+
+  {
+    "christoomey/vim-tmux-navigator",
+    cmd = {
+      "TmuxNavigateLeft",
+      "TmuxNavigateDown",
+      "TmuxNavigateUp",
+      "TmuxNavigateRight",
+      "TmuxNavigatePrevious",
+      "TmuxNavigatorProcessList",
+    },
+    keys = {
+      { "<C-h>", "<cmd>TmuxNavigateLeft<CR>", desc = "Move left in Tmux" },
+      { "<C-j>", "<cmd>TmuxNavigateDown<CR>", desc = "Move down in Tmux" },
+      { "<C-k>", "<cmd>TmuxNavigateUp<CR>", desc = "Move up in Tmux" },
+      { "<C-l>", "<cmd>TmuxNavigateRight<CR>", desc = "Move right in Tmux" },
+      { "<C-\\>", "<cmd>TmuxNavigatePrevious<CR>", desc = "Move to previous Tmux pane" },
+    },
+  },
 }
