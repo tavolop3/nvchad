@@ -27,5 +27,10 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
 end
 
 return {
+  require("ufo").setup {
+    provider_selector = function(bufnr, filetype, buftype)
+      return { "lsp", "indent" }
+    end,
+  },
   fold_virt_text_handler = handler,
 }

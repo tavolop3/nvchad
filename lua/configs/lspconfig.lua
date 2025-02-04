@@ -6,13 +6,19 @@ local lspconfig = require "lspconfig"
 -- EXAMPLE
 local servers = { "html", "cssls", "clangd" }
 local nvlsp = require "nvchad.configs.lspconfig"
+-- por las dudas capabilities antes estaba dentro del for con nvlsp.capabilities
+local capabilities = nvlsp.capabilities
+capabilities.textDocument.foldingRange = {
+  dynamicRegistration = false,
+  lineFoldingOnly = true,
+}
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
     on_attach = nvlsp.on_attach,
     on_init = nvlsp.on_init,
-    capabilities = nvlsp.capabilities,
+    capabilities = capabilities,
   }
 end
 
