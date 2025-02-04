@@ -122,10 +122,12 @@ return {
         },
       },
       on_open = function()
-        vim.opt.laststatus = 0 -- oculta la statusline al entrar en Zen Mode
+        -- vim.opt.laststatus = 0 -- oculta la statusline al entrar en Zen Mode
+        vim.opt.foldcolumn = "0" -- oculta la columna de fold
       end,
       on_close = function()
-        vim.opt.laststatus = 3 -- reactiva la statusline al salir de Zen Mode
+        -- vim.opt.laststatus = 3 -- reactiva la statusline al salir de Zen Mode
+        vim.opt.foldcolumn = "1"
       end,
     },
     keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
@@ -226,5 +228,36 @@ return {
       { "<C-l>", "<cmd>TmuxNavigateRight<CR>", desc = "Move right in Tmux" },
       { "<C-\\>", "<cmd>TmuxNavigatePrevious<CR>", desc = "Move to previous Tmux pane" },
     },
+  },
+
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = "kevinhwang91/promise-async",
+    event = "UIEnter",
+    config = function()
+      require("ufo").setup(require "configs.ufo-conf")
+    end,
+  },
+
+  {
+    "luukvbaal/statuscol.nvim",
+    event = "UIEnter",
+    opts = function()
+      local builtin = require "statuscol.builtin"
+      return {
+        setopt = true,
+        -- override the default list of segments with:
+        -- number-less fold indicator, then signs, then line number & separator
+        segments = {
+          { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
+          { text = { "%s" }, click = "v:lua.ScSa" },
+          {
+            text = { builtin.lnumfunc, " " },
+            condition = { true, builtin.not_empty },
+            click = "v:lua.ScLa",
+          },
+        },
+      }
+    end,
   },
 }

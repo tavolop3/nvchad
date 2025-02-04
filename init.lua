@@ -58,3 +58,9 @@ autocmd("BufReadPost", {
 
 -- para que me siga el cd cuando estoy en otro directorio
 require "plugins.custom.autocd"
+
+require("ufo").setup {
+  provider_selector = function(bufnr, filetype, buftype)
+    return { "treesitter", "indent" }
+  end,
+}
