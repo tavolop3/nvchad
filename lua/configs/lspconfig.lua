@@ -3,8 +3,9 @@ require("nvchad.configs.lspconfig").defaults()
 
 local lspconfig = require "lspconfig"
 
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
 -- EXAMPLE
-local servers = { "html", "cssls", "clangd" }
+local servers = { "html", "cssls", "ts_ls", "jsonls", "clangd", "pyright" }
 local nvlsp = require "nvchad.configs.lspconfig"
 -- por las dudas capabilities antes estaba dentro del for con nvlsp.capabilities
 local capabilities = nvlsp.capabilities
