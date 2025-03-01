@@ -40,12 +40,14 @@ map("n", "<leader>tt", function()
   require("nvchad.term").new { pos = "sp" }
 end, { desc = "New horizontal terminal" })
 
+-- tmux nav
 vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { silent = true, noremap = true })
 vim.keymap.set("n", "<C-\\>", "<cmd>TmuxNavigatePrevious<CR>", { silent = true, noremap = true })
 
+-- ufo folding peek
 vim.keymap.set("n", "zK", function()
   local winid = require("ufo").peekFoldedLinesUnderCursor()
   if not winid then
