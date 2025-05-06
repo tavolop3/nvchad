@@ -58,3 +58,10 @@ autocmd("BufReadPost", {
 
 -- para que me siga el cd cuando estoy en otro directorio
 require "plugins.custom.autocd"
+
+-- autosave
+vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+  pattern = { "*" },
+  command = "silent! wall",
+  nested = true,
+})
