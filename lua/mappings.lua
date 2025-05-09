@@ -58,3 +58,6 @@ end)
 -- run code
 map("n", "<leader>rt", "<cmd>!cargo test<CR>", { desc = "Rust run cargo test" })
 map("n", "<leader>rr", "<cmd>!cargo run<CR>", { desc = "Rust run cargo" })
+
+-- toggle nvim tree
+map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })

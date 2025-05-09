@@ -29,3 +29,31 @@ end
 --   on_init = nvlsp.on_init,
 --   capabilities = nvlsp.capabilities,
 -- }
+
+-- Custom rust-analyzer setup
+-- lspconfig.rust_analyzer.setup {
+--   on_attach = function(client, bufnr)
+--     nvlsp.on_attach(client, bufnr) -- Use NvChad's on_attach
+--     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+--   end,
+--   on_init = nvlsp.on_init,
+--   capabilities = capabilities,
+--   settings = {
+--     ["rust-analyzer"] = {
+--       imports = {
+--         granularity = {
+--           group = "module",
+--         },
+--         prefix = "self",
+--       },
+--       cargo = {
+--         buildScripts = {
+--           enable = true,
+--         },
+--       },
+--       procMacro = {
+--         enable = true,
+--       },
+--     },
+--   },
+-- }
