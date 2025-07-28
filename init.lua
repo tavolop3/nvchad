@@ -60,8 +60,12 @@ autocmd("BufReadPost", {
 require "plugins.custom.autocd"
 
 -- autosave
-vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
-  pattern = { "*" },
-  command = "silent! wall",
-  nested = true,
-})
+-- vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+--   pattern = { "*" },
+--   callback = function()
+--     if vim.bo.filetype ~= "harpoon" then
+--       vim.cmd "silent! wall"
+--     end
+--   end,
+--   nested = true,
+-- })

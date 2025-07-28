@@ -34,6 +34,11 @@ map("n", "<leader>h", "<C-w>h", { desc = "Moverse a la ventana izquierda" })
 map("n", "<leader>j", "<C-w>j", { desc = "Moverse a la ventana inferior" })
 map("n", "<leader>k", "<C-w>k", { desc = "Moverse a la ventana superior" })
 map("n", "<leader>l", "<C-w>l", { desc = "Moverse a la ventana derecha" })
+-- window movement with arrows
+map("n", "<leader><Left>", "<C-w>h", { desc = "Moverse a la ventana izquierda" })
+map("n", "<leader><Down>", "<C-w>j", { desc = "Moverse a la ventana inferior" })
+map("n", "<leader><Up>", "<C-w>k", { desc = "Moverse a la ventana superior" })
+map("n", "<leader><Right>", "<C-w>l", { desc = "Moverse a la ventana derecha" })
 
 -- horizontal term
 map("n", "<leader>tt", function()
@@ -60,4 +65,19 @@ map("n", "<leader>rt", "<cmd>!cargo test<CR>", { desc = "Rust run cargo test" })
 map("n", "<leader>rr", "<cmd>!cargo run<CR>", { desc = "Rust run cargo" })
 
 -- toggle nvim tree
-map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
+-- map("n", "<leader>e", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle NvimTree" })
+
+local function smart_nvim_tree_toggle()
+  local view = require "nvim-tree.view"
+  local api = require "nvim-tree.api"
+
+  if view.is_visible() and vim.bo.filetype == "NvimTree" then
+    -- Si estamos en NvimTree, volvemos al buffer anterior
+    vim.cmd "wincmd p"
+  else
+    -- Si no, abrimos NvimTree
+    api.tree.open()
+  end
+end
+
+vim.keymap.set("n", "<leader>e", smart_nvim_tree_toggle, { desc = "Abrir NvimTree o volver al buffer anterior" })
