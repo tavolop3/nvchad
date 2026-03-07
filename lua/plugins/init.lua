@@ -48,7 +48,7 @@ return {
 
   -- jump motions
   {
-    "ggandor/leap.nvim",
+    url = "https://codeberg.org/andyg/leap.nvim",
   },
 
   {
@@ -306,7 +306,41 @@ return {
 
   {
     "mrcjkb/rustaceanvim",
-    version = "^6", -- Recommended
+    version = "^7", -- Recommended
     lazy = false, -- This plugin is already lazy
+  },
+
+  {
+    "nvimtools/none-ls.nvim",
+    event = "VeryLazy",
+    opts = function()
+      return require "configs.null-ls"
+    end,
+  },
+
+  {
+    "nvimtools/none-ls.nvim",
+    dependencies = {
+      "nvimtools/none-ls-extras.nvim",
+    },
+  },
+
+  {
+    "MagicDuck/grug-far.nvim",
+    cmd = "GrugFar",
+    -- Note (lazy loading): grug-far.lua defers all it's requires so it's lazy by default
+    -- additional lazy config to defer loading is not really needed...
+    config = function()
+      -- optional setup call to override plugin options
+      -- alternatively you can set options with vim.g.grug_far = { ... }
+      require("grug-far").setup {
+        -- options, see Configuration section below
+        -- there are no required options atm
+      }
+    end,
+    keys = {
+      -- Agregamos un atajo rápido: Espacio + s + r (Search and Replace)
+      { "<leader>sr", "<cmd>GrugFar<CR>", desc = "Buscar y Reemplazar (Grug Far)" },
+    },
   },
 }

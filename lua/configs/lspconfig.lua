@@ -1,27 +1,30 @@
 -- load defaults i.e lua_lsp
 require("nvchad.configs.lspconfig").defaults()
 
-local lspconfig = require "lspconfig"
-
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md
--- EXAMPLE
-local servers = { "html", "cssls", "ts_ls", "jsonls", "pyright", "clangd", "hyprls", "lua_ls" } --clangd, "rust_analyzer"
-local nvlsp = require "nvchad.configs.lspconfig"
--- por las dudas capabilities antes estaba dentro del for con nvlsp.capabilities
-local capabilities = nvlsp.capabilities
-capabilities.textDocument.foldingRange = {
-  dynamicRegistration = false,
-  lineFoldingOnly = true,
+local servers = {
+  "html",
+  "cssls",
+  "ts_ls",
+  "jsonls",
+  "pyright",
+  "clangd",
+  "hyprls",
+  "lua_ls",
+  "zls",
+  "gopls",
+  "bashls",
 }
+--clangd, "rust_analyzer"
 
--- lsps with default config
-for _, lsp in ipairs(servers) do
-  lspconfig[lsp].setup {
-    on_attach = nvlsp.on_attach,
-    on_init = nvlsp.on_init,
-    capabilities = capabilities,
-  }
-end
+vim.lsp.enable(servers)
+-- for _, name in pairs(servers) do
+--   vim.lsp.config(name, {})
+--   vim.lsp.enable(name)
+-- end
+--
+-- if you dont want to call the enable method in the loop, just pass a table.
+-- vim.lsp.enable(vim.tbl_keys(servers))
+-- vim.lsp.enable({"pyright", "clangd"})
 
 -- configuring single server, example: typescript
 -- lspconfig.ts_ls.setup {
