@@ -12,7 +12,7 @@ return {
 
   {
     "stevearc/conform.nvim",
-    event = "BufWritePre", -- uncomment for format on save
+    event = "BufWritePre",
     opts = require "configs.conform",
   },
 
@@ -33,6 +33,10 @@ return {
         "vimdoc",
         "html",
         "css",
+        "typescript",
+        "javascript",
+        "tsx",
+        "sql",
       },
     },
   },
@@ -49,21 +53,35 @@ return {
   -- jump motions
   {
     url = "https://codeberg.org/andyg/leap.nvim",
+    lazy = false,
+    config = function()
+      vim.keymap.set({ "n", "x", "o" }, "f", function()
+        require("leap").leap {
+          inputlen = 1,
+        }
+      end)
+      vim.keymap.set({ "n", "x", "o" }, "F", function()
+        require("leap").leap {
+          inputlen = 1,
+          backward = true,
+        }
+      end)
+    end,
   },
 
-  {
-    "ggandor/flit.nvim",
-    enabled = true,
-    keys = function()
-      ---@type LazyKeysSpec[]
-      local ret = {}
-      for _, key in ipairs { "f", "F", "t", "T" } do
-        ret[#ret + 1] = { key, mode = { "n", "x", "o" } }
-      end
-      return ret
-    end,
-    opts = { labeled_modes = "nx" },
-  },
+  -- {
+  --   "ggandor/flit.nvim",
+  --   enabled = true,
+  --   keys = function()
+  --     ---@type LazyKeysSpec[]
+  --     local ret = {}
+  --     for _, key in ipairs { "f", "F", "t", "T" } do
+  --       ret[#ret + 1] = { key, mode = { "n", "x", "o" } }
+  --     end
+  --     return ret
+  --   end,
+  --   opts = { labeled_modes = "nx" },
+  -- },
 
   { "tpope/vim-repeat", event = "VeryLazy" },
 
@@ -341,6 +359,46 @@ return {
     keys = {
       -- Agregamos un atajo rápido: Espacio + s + r (Search and Replace)
       { "<leader>sr", "<cmd>GrugFar<CR>", desc = "Buscar y Reemplazar (Grug Far)" },
+    },
+  },
+
+  {
+    "andymass/vim-matchup",
+    init = function()
+      -- modify your configuration vars here
+      vim.g.matchup_treesitter_stopline = 500
+
+      -- or call the setup function provided as a helper. It defines the
+      -- configuration vars for you
+      require("match-up").setup {
+        treesitter = {
+          stopline = 500,
+        },
+      }
+    end,
+    -- or use the `opts` mechanism built into `lazy.nvim`. It calls
+    -- `require('match-up').setup` under the hood
+    ---@type matchup.Config
+    opts = {
+      treesitter = {
+        stopline = 500,
+      },
+    },
+  },
+
+  {
+    "stevearc/aerial.nvim",
+    opts = {},
+    keys = {
+      { "<leader>a", "<cmd>AerialToggle!<CR>", desc = "Toggle Aerial" },
+
+      { "[[", "<cmd>AerialPrev<CR>", desc = "Aerial anterior" },
+      { "]]", "<cmd>AerialNext<CR>", desc = "Aerial siguiente" },
+    },
+    -- Optional dependencies
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
     },
   },
 }

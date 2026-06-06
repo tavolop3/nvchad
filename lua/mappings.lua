@@ -81,3 +81,10 @@ local function smart_nvim_tree_toggle()
 end
 
 vim.keymap.set("n", "<leader>e", smart_nvim_tree_toggle, { desc = "Abrir NvimTree o volver al buffer anterior" })
+
+-- search and replce current word
+vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+
+-- move in batch
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")

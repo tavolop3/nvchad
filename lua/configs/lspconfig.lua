@@ -13,6 +13,7 @@ local servers = {
   "zls",
   "gopls",
   "bashls",
+  "astro-language-server",
 }
 --clangd, "rust_analyzer"
 
